@@ -13,11 +13,10 @@ export default function Footer() {
 
                     {/* Brand & Mission (Spans 2 cols) */}
                     <div className="xl:col-span-2 space-y-8">
-                        <Link href="/" className="flex items-center gap-3 group w-fit">
-                            <div className="w-10 h-10 rounded-full overflow-hidden relative">
-                                <Image src="/pavika-logo.jpg" alt="Pavika Logo" fill className="object-cover" />
+                        <Link href="/" className="flex items-center group w-fit bg-white px-3 py-2 rounded-xl">
+                            <div className="relative w-40 h-12">
+                                <Image src="/pavika-logo.jpg" alt="Pavika Logo" fill className="object-contain object-left" />
                             </div>
-                            <span className="text-2xl font-black tracking-tight text-white group-hover:text-indigo-400 transition-colors">Pavika</span>
                         </Link>
                         <p className="text-sm leading-relaxed max-w-md text-zinc-500 hover:text-zinc-400 transition-colors">
                             Architecting the future of logistics. We provide state-of-the-art enterprise distribution networks engineered for massive scale, reliability, and unparalleled speed.

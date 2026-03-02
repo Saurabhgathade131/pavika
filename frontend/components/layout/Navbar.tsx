@@ -5,19 +5,16 @@ export default function Navbar() {
     return (
         <nav className="fixed w-full z-50 glass-panel border-0 border-b rounded-none bg-white/80 dark:bg-slate-900/80">
             <div className="container mx-auto px-4 h-20 flex items-center justify-between pointer-events-auto">
-                <Link href="/" className="flex items-center gap-3">
-                    <div className="relative w-10 h-10 rounded-full overflow-hidden">
+                <Link href="/" className="flex items-center">
+                    <div className="relative w-36 h-10">
                         <Image
                             src="/pavika-logo.jpg"
                             alt="Pavika Distribution Network Logo"
                             fill
-                            className="object-cover"
+                            className="object-contain object-left"
                             priority
                         />
                     </div>
-                    <span className="font-heading font-bold text-xl tracking-tight hidden sm:block">
-                        Pavika <span className="text-brand-secondary">Distribution</span>
-                    </span>
                 </Link>
 
                 <div className="hidden md:flex items-center gap-8">

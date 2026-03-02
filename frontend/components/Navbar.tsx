@@ -54,11 +54,10 @@ export default function Navbar() {
                         }`}>
 
                         {/* Brand */}
-                        <Link href="/" className="flex items-center gap-2 group">
-                            <div className="w-10 h-10 rounded-full overflow-hidden relative transition-transform duration-500 group-hover:scale-105">
-                                <Image src="/pavika-logo.jpg" alt="Pavika Logo" fill className="object-cover" priority />
+                        <Link href="/" className="flex items-center group">
+                            <div className="relative w-36 h-10 transition-transform duration-500 group-hover:scale-105">
+                                <Image src="/pavika-logo.jpg" alt="Pavika Logo" fill className="object-contain object-left" priority />
                             </div>
-                            <span className="font-bold tracking-tighter text-lg text-zinc-900">Pavika</span>
                         </Link>
 
                         {/* Desktop Navigation */}
