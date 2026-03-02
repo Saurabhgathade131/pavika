@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { PackageSearch, ArrowUpRight } from "lucide-react";
+import Image from "next/image";
+import { ArrowUpRight } from "lucide-react";
 
 export default function Footer() {
     return (
@@ -12,9 +13,9 @@ export default function Footer() {
 
                     {/* Brand & Mission (Spans 2 cols) */}
                     <div className="xl:col-span-2 space-y-8">
-                        <Link href="/" className="flex items-center gap-2 group w-fit">
-                            <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-indigo-500 to-sky-400 flex items-center justify-center">
-                                <PackageSearch className="h-4 w-4 text-white" />
+                        <Link href="/" className="flex items-center gap-3 group w-fit">
+                            <div className="w-10 h-10 rounded-full overflow-hidden relative">
+                                <Image src="/pavika-logo.jpg" alt="Pavika Logo" fill className="object-cover" />
                             </div>
                             <span className="text-2xl font-black tracking-tight text-white group-hover:text-indigo-400 transition-colors">Pavika</span>
                         </Link>
