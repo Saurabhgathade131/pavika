@@ -1,8 +1,9 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { PackageSearch, Menu, X } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence, useScroll, useSpring } from "framer-motion";
 
@@ -54,8 +55,8 @@ export default function Navbar() {
 
                         {/* Brand */}
                         <Link href="/" className="flex items-center gap-2 group">
-                            <div className="w-9 h-9 rounded-full bg-gradient-to-tr from-indigo-600 via-violet-600 to-sky-400 flex items-center justify-center shadow-lg relative overflow-hidden transition-transform duration-500 group-hover:scale-105">
-                                <PackageSearch className="w-4.5 h-4.5 text-white relative z-10" />
+                            <div className="w-10 h-10 rounded-full overflow-hidden relative transition-transform duration-500 group-hover:scale-105">
+                                <Image src="/pavika-logo.jpg" alt="Pavika Logo" fill className="object-cover" priority />
                             </div>
                             <span className="font-bold tracking-tighter text-lg text-zinc-900">Pavika</span>
                         </Link>
