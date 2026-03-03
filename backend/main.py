@@ -1,67 +1,42 @@
-from fastapi import FastAPI, File, UploadFile, HTTPException
+from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from mangum import Mangum
-import os
-import json
+import structlog
 
-app = FastAPI(title="Pavika Distribution Network API")
+from app.api.api import api_router
+from app.core.config import settings
+from app.core.logging_setup import setup_logging
+from app.db.session import engine, Base
 
-# Configure CORS for Vercel frontend + local dev
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=[
-        "http://localhost:3000",
-        "http://127.0.0.1:3000",
-        "https://frontend-tau-ten-44.vercel.app",
-        "https://*.vercel.app",
-    ],
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
+# Set up structlog
+setup_logging()
+logger = structlog.get_logger(__name__)
+
+# Note: In production, rely on Alembic migrations instead of create_all
+# But for rapid development / initial setup, we do create_all:
+Base.metadata.create_all(bind=engine)
+
+app = FastAPI(
+    title=settings.PROJECT_NAME,
+    openapi_url=f"{settings.API_V1_STR}/openapi.json"
 )
 
-# In Lambda, /tmp is the only writable directory
-UPLOAD_DIR = "/tmp/uploads"
-os.makedirs(UPLOAD_DIR, exist_ok=True)
-
+# Set all CORS enabled origins
+if settings.BACKEND_CORS_ORIGINS:
+    app.add_middleware(
+        CORSMiddleware,
+        allow_origins=[str(origin) for origin in settings.BACKEND_CORS_ORIGINS],
+        allow_credentials=True,
+        allow_methods=["*"],
+        allow_headers=["*"],
+    )
 
 @app.get("/")
-async def root():
-    return {"message": "Welcome to Pavika Distribution Network API"}
+def root():
+    return {"message": "Welcome to Pavika Enterprise Backend HQ"}
 
+app.include_router(api_router, prefix=settings.API_V1_STR)
 
-@app.get("/api/health")
-async def health_check():
-    return {"status": "healthy"}
-
-
-@app.post("/api/admin/upload")
-async def upload_image(file: UploadFile = File(...)):
-    """Handle image uploads from the admin dashboard"""
-    try:
-        file_path = os.path.join(UPLOAD_DIR, file.filename)
-        contents = await file.read()
-        with open(file_path, "wb") as buffer:
-            buffer.write(contents)
-
-        return {
-            "filename": file.filename,
-            "url": f"/api/media/{file.filename}",
-            "status": "success",
-        }
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
-
-
-@app.get("/api/admin/media")
-async def get_media():
-    """List all uploaded media files"""
-    try:
-        files = os.listdir(UPLOAD_DIR)
-        return {"files": [{"filename": f, "url": f"/api/media/{f}"} for f in files]}
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
-
-
-# Mangum handler wraps FastAPI for AWS Lambda + API Gateway
 handler = Mangum(app, lifespan="off")
+
+logger.info("application_startup_complete")

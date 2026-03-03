@@ -14,10 +14,12 @@ import {
     ShieldCheck,
     Cpu,
     Zap,
+    Users,
     MoreVertical,
     Plus
 } from "lucide-react";
 import { useState, useRef, useEffect } from "react";
+import { useRouter } from "next/navigation";
 
 // --- System Pulse Component ---
 function SystemPulse() {
@@ -83,6 +85,70 @@ function SpotlightCard({ children, className = "" }: { children: React.ReactNode
 
 export default function AdminDashboard() {
     const [activeTab, setActiveTab] = useState("dashboard");
+    const [authVerified, setAuthVerified] = useState(false);
+    const [clients, setClients] = useState<any[]>([]);
+    const [loadingClients, setLoadingClients] = useState(false);
+    const [isAddingClient, setIsAddingClient] = useState(false);
+
+    // Form state
+    const [newClient, setNewClient] = useState({
+        business_name: "", contact_name: "", contact_email: "", contact_phone: "", service_tier: "Standard"
+    });
+    const router = useRouter();
+
+    const fetchClients = async () => {
+        setLoadingClients(true);
+        try {
+            const token = localStorage.getItem("admin_token");
+            const res = await fetch("http://127.0.0.1:8000/api/clients/", {
+                headers: { "Authorization": `Bearer ${token}` }
+            });
+            if (res.ok) setClients(await res.json());
+        } catch (err) {
+            console.error(err);
+        } finally {
+            setLoadingClients(false);
+        }
+    };
+
+    const handleCreateClient = async (e: React.FormEvent) => {
+        e.preventDefault();
+        try {
+            const token = localStorage.getItem("admin_token");
+            const res = await fetch("http://127.0.0.1:8000/api/clients/", {
+                method: "POST",
+                headers: { "Content-Type": "application/json", "Authorization": `Bearer ${token}` },
+                body: JSON.stringify(newClient)
+            });
+            if (res.ok) {
+                setIsAddingClient(false);
+                setNewClient({ business_name: "", contact_name: "", contact_email: "", contact_phone: "", service_tier: "Standard" });
+                fetchClients();
+            }
+        } catch (err) {
+            console.error(err);
+        }
+    };
+
+    useEffect(() => {
+        // Enforce RBAC
+        const token = localStorage.getItem("admin_token");
+        if (!token) {
+            router.push("/admin/login");
+        } else {
+            setAuthVerified(true);
+            fetchClients();
+        }
+    }, [router]);
+
+    const handleLogout = () => {
+        localStorage.removeItem("admin_token");
+        router.push("/admin/login");
+    };
+
+    if (!authVerified) {
+        return <div className="min-h-screen bg-zinc-50 flex items-center justify-center">Verifying credentials...</div>;
+    }
 
     return (
         <div className="min-h-screen bg-zinc-50/50 pt-28 pb-20 selection:bg-indigo-500/10">
@@ -127,6 +193,7 @@ export default function AdminDashboard() {
                             <nav className="space-y-2">
                                 {[
                                     { id: 'dashboard', label: 'Overview', icon: LayoutDashboard },
+                                    { id: 'clients', label: 'Client Management', icon: Users },
                                     { id: 'media', label: 'Asset Library', icon: ImageIcon, count: 4 },
                                     { id: 'settings', label: 'Protocol Config', icon: Settings },
                                 ].map((tab) => (
@@ -166,7 +233,7 @@ export default function AdminDashboard() {
                                 </div>
                             </div>
 
-                            <button className="w-full flex items-center justify-center gap-3 px-6 py-4 rounded-2xl text-red-600 hover:bg-red-50 transition-all font-bold text-sm border border-transparent hover:border-red-100">
+                            <button onClick={handleLogout} className="w-full flex items-center justify-center gap-3 px-6 py-4 rounded-2xl text-red-600 hover:bg-red-50 transition-all font-bold text-sm border border-transparent hover:border-red-100">
                                 <LogOut className="w-4 h-4" /> Terminate Session
                             </button>
                         </motion.div>
@@ -242,6 +309,103 @@ export default function AdminDashboard() {
                                                 ))}
                                             </div>
                                         </div>
+                                    </div>
+                                )}
+
+                                {activeTab === "clients" && (
+                                    <div className="space-y-6 animate-in fade-in slide-in-from-bottom-4 duration-500 p-10 md:p-14">
+                                        <div className="flex items-center justify-between mb-8 border-b border-zinc-100 pb-10">
+                                            <div>
+                                                <h2 className="text-3xl font-black tracking-tight text-zinc-900 mb-2">Registered Businesses</h2>
+                                                <p className="text-sm font-medium text-zinc-500">Manage network accounts and tier access.</p>
+                                            </div>
+                                            {!isAddingClient && (
+                                                <button onClick={() => setIsAddingClient(true)} className="flex items-center gap-2 bg-indigo-600 text-white px-5 py-2.5 rounded-xl font-bold hover:bg-indigo-700 transition-colors shadow-sm">
+                                                    <Plus className="w-5 h-5" /> Onboard Client
+                                                </button>
+                                            )}
+                                        </div>
+
+                                        {isAddingClient ? (
+                                            <div className="glass-panel p-8 rounded-3xl border border-zinc-200/50">
+                                                <div className="flex justify-between items-center mb-6">
+                                                    <h3 className="text-xl font-bold text-zinc-900">New Client Onboarding</h3>
+                                                    <button onClick={() => setIsAddingClient(false)} className="text-zinc-400 hover:text-zinc-600">Cancel</button>
+                                                </div>
+                                                <form onSubmit={handleCreateClient} className="space-y-4">
+                                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                                        <div>
+                                                            <label className="block text-sm font-bold text-zinc-700 mb-1">Business Name</label>
+                                                            <input required type="text" value={newClient.business_name} onChange={e => setNewClient({ ...newClient, business_name: e.target.value })} className="w-full p-3 rounded-xl border border-zinc-200" />
+                                                        </div>
+                                                        <div>
+                                                            <label className="block text-sm font-bold text-zinc-700 mb-1">Service Tier</label>
+                                                            <select value={newClient.service_tier} onChange={e => setNewClient({ ...newClient, service_tier: e.target.value })} className="w-full p-3 rounded-xl border border-zinc-200 bg-white">
+                                                                <option>Standard</option>
+                                                                <option>Enterprise</option>
+                                                                <option>Elite</option>
+                                                            </select>
+                                                        </div>
+                                                        <div>
+                                                            <label className="block text-sm font-bold text-zinc-700 mb-1">Contact Name</label>
+                                                            <input required type="text" value={newClient.contact_name} onChange={e => setNewClient({ ...newClient, contact_name: e.target.value })} className="w-full p-3 rounded-xl border border-zinc-200" />
+                                                        </div>
+                                                        <div>
+                                                            <label className="block text-sm font-bold text-zinc-700 mb-1">Contact Email</label>
+                                                            <input required type="email" value={newClient.contact_email} onChange={e => setNewClient({ ...newClient, contact_email: e.target.value })} className="w-full p-3 rounded-xl border border-zinc-200" />
+                                                        </div>
+                                                    </div>
+                                                    <button type="submit" className="w-full bg-zinc-900 text-white rounded-xl py-3 font-bold hover:bg-zinc-800 transition-colors mt-4">Create Account</button>
+                                                </form>
+                                            </div>
+                                        ) : (
+                                            <div className="glass-panel p-8 rounded-3xl border border-zinc-200/50">
+                                                {loadingClients ? (
+                                                    <div className="text-center py-12 text-zinc-500">Loading network clients...</div>
+                                                ) : clients.length === 0 ? (
+                                                    <div className="text-center py-12">
+                                                        <div className="w-16 h-16 bg-indigo-50 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                                                            <Users className="w-8 h-8 text-indigo-500" />
+                                                        </div>
+                                                        <h3 className="text-lg font-bold text-zinc-900 mb-2">No clients found</h3>
+                                                        <p className="text-sm text-zinc-500">Add your first business client to the network.</p>
+                                                    </div>
+                                                ) : (
+                                                    <div className="overflow-x-auto">
+                                                        <table className="w-full text-left border-collapse">
+                                                            <thead>
+                                                                <tr className="border-b border-zinc-100">
+                                                                    <th className="py-4 px-4 font-bold text-zinc-900">Business</th>
+                                                                    <th className="py-4 px-4 font-bold text-zinc-900">Contact</th>
+                                                                    <th className="py-4 px-4 font-bold text-zinc-900 text-center">Tier</th>
+                                                                    <th className="py-4 px-4 font-bold text-zinc-900 text-center">Status</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                {clients.map(client => (
+                                                                    <tr key={client.id} className="border-b border-zinc-50 hover:bg-zinc-50/50 transition-colors">
+                                                                        <td className="py-4 px-4">
+                                                                            <div className="font-bold text-zinc-900">{client.business_name}</div>
+                                                                            <div className="text-xs text-zinc-500 font-mono mt-0.5">ID: {client.id}</div>
+                                                                        </td>
+                                                                        <td className="py-4 px-4">
+                                                                            <div className="text-sm text-zinc-700 font-medium">{client.contact_name}</div>
+                                                                            <div className="text-xs text-zinc-500">{client.contact_email}</div>
+                                                                        </td>
+                                                                        <td className="py-4 px-4 text-center">
+                                                                            <span className="inline-block px-3 py-1 bg-indigo-50 text-indigo-700 rounded-full text-xs font-bold">{client.service_tier}</span>
+                                                                        </td>
+                                                                        <td className="py-4 px-4 text-center">
+                                                                            <span className="inline-block px-3 py-1 bg-emerald-50 text-emerald-700 rounded-full text-xs font-bold">{client.status}</span>
+                                                                        </td>
+                                                                    </tr>
+                                                                ))}
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                )}
+                                            </div>
+                                        )}
                                     </div>
                                 )}
 
