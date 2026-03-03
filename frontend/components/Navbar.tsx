@@ -42,15 +42,15 @@ export default function Navbar() {
         >
             {/* Scroll Progress Bar */}
             <motion.div
-                className="fixed top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-indigo-600 via-violet-600 to-sky-500 origin-left z-50"
+                className="fixed top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-[var(--color-accent)] via-[var(--color-accent-light)] to-[var(--color-accent)] origin-left z-50"
                 style={{ scaleX }}
             />
 
             <div className={`w-full transition-all duration-500 pointer-events-auto ${scrolled ? 'py-4' : 'py-8'}`}>
                 <div className="container mx-auto max-w-5xl px-4">
                     <div className={`glass-premium rounded-full border transition-all duration-500 px-6 py-2.5 flex items-center justify-between ${scrolled
-                        ? 'bg-white/80 border-white/40 shadow-[0_8px_32px_-8px_rgba(0,0,0,0.08)] backdrop-blur-xl'
-                        : 'bg-white/20 border-white/10 hover:bg-white/40 shadow-none'
+                        ? 'bg-[var(--color-primary)]/95 border-[var(--color-accent)]/20 shadow-[0_8px_32px_-8px_rgba(0,0,0,0.5)] backdrop-blur-xl'
+                        : 'bg-[var(--color-primary)]/50 border-[var(--color-accent)]/10 hover:bg-[var(--color-primary)]/80 shadow-none'
                         }`}>
 
                         {/* Brand */}
@@ -66,12 +66,12 @@ export default function Navbar() {
                                 <Link
                                     key={link.name}
                                     href={link.href}
-                                    className={`text-sm font-semibold transition-all duration-300 relative group py-1 ${pathname === link.href ? "text-indigo-600" : "text-zinc-500 hover:text-zinc-900"
+                                    className={`text-sm font-semibold transition-all duration-300 relative group py-1 ${pathname === link.href ? "text-[var(--color-accent)]" : "text-zinc-300 hover:text-[var(--color-accent-light)]"
                                         }`}
                                 >
                                     {link.name}
                                     <motion.div
-                                        className={`absolute -bottom-1 left-0 right-0 h-0.5 bg-indigo-600 rounded-full origin-left transition-transform duration-300 ${pathname === link.href ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-50'
+                                        className={`absolute -bottom-1 left-0 right-0 h-0.5 bg-[var(--color-accent)] rounded-full origin-left transition-transform duration-300 ${pathname === link.href ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-50'
                                             }`}
                                     />
                                 </Link>
@@ -87,7 +87,7 @@ export default function Navbar() {
 
                         {/* Mobile Menu Toggle */}
                         <button
-                            className="md:hidden p-2 text-zinc-600 hover:text-indigo-600 transition-colors"
+                            className="md:hidden p-2 text-zinc-300 hover:text-[var(--color-accent)] transition-colors"
                             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                         >
                             {isMobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
@@ -104,7 +104,7 @@ export default function Navbar() {
                         animate={{ opacity: 1, y: 0, scale: 1 }}
                         exit={{ opacity: 0, y: -20, scale: 0.95 }}
                         transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-                        className="md:hidden absolute top-full left-4 right-4 mt-2 p-6 rounded-[2rem] glass-premium shadow-2xl overflow-hidden bg-white/95 pointer-events-auto"
+                        className="md:hidden absolute top-full left-4 right-4 mt-2 p-6 rounded-[2rem] glass-premium shadow-2xl overflow-hidden bg-[var(--color-primary-light)]/95 pointer-events-auto"
                     >
                         <div className="flex flex-col gap-3">
                             {navLinks.map((link) => (
@@ -113,8 +113,8 @@ export default function Navbar() {
                                     href={link.href}
                                     onClick={() => setIsMobileMenuOpen(false)}
                                     className={`px-5 py-4 rounded-2xl text-base font-semibold transition-all ${pathname === link.href
-                                        ? "bg-indigo-50 text-indigo-600 shadow-sm"
-                                        : "text-zinc-600 hover:bg-zinc-50"
+                                        ? "bg-[var(--color-accent)]/10 text-[var(--color-accent)] shadow-sm"
+                                        : "text-zinc-300 hover:bg-white/5"
                                         }`}
                                 >
                                     {link.name}
@@ -123,7 +123,7 @@ export default function Navbar() {
                             <Link
                                 href="/admin"
                                 onClick={() => setIsMobileMenuOpen(false)}
-                                className="mt-4 px-5 py-4 rounded-2xl bg-zinc-900 text-white text-base font-semibold text-center hover:bg-black transition-all shadow-xl active:scale-95"
+                                className="mt-4 px-5 py-4 rounded-2xl bg-[var(--color-accent)] text-[var(--color-primary-dark)] text-base font-semibold text-center hover:opacity-90 transition-all shadow-xl active:scale-95"
                             >
                                 Dashboard
                             </Link>

@@ -48,17 +48,17 @@ export default function AdminLogin() {
     };
 
     return (
-        <div className="min-h-screen bg-zinc-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8 selection:bg-indigo-500/10">
+        <div className="min-h-screen bg-primary flex flex-col justify-center py-12 sm:px-6 lg:px-8 selection:bg-accent/10">
             <div className="sm:mx-auto sm:w-full sm:max-w-md">
                 <div className="flex justify-center">
                     <div className="relative w-48 h-12">
                         <Image src="/pavika-logo.jpg" alt="Pavika Logo" fill className="object-contain" priority />
                     </div>
                 </div>
-                <h2 className="mt-6 text-center text-3xl font-black tracking-tight text-zinc-900">
+                <h2 className="mt-6 text-center text-3xl font-black tracking-tight text-white">
                     System Control Access
                 </h2>
-                <p className="mt-2 text-center text-sm text-zinc-600 font-medium">
+                <p className="mt-2 text-center text-sm text-zinc-400 font-medium">
                     Restricted area for authorized personnel only
                 </p>
             </div>
@@ -72,7 +72,7 @@ export default function AdminLogin() {
                             </div>
                         )}
                         <div>
-                            <label className="block text-sm font-bold text-zinc-900 mb-2">
+                            <label className="block text-sm font-bold text-white mb-2">
                                 Administrator ID
                             </label>
                             <input
@@ -80,13 +80,13 @@ export default function AdminLogin() {
                                 required
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
-                                className="w-full px-4 py-3 rounded-xl border border-zinc-200 bg-zinc-50/50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition-all text-sm font-medium"
+                                className="w-full px-4 py-3 rounded-xl border border-zinc-200 bg-primary/50 focus:bg-primary focus:outline-none focus:ring-2 focus:ring-accent/20 focus:border-accent transition-all text-sm font-medium"
                                 placeholder="admin@pavika.com"
                             />
                         </div>
 
                         <div>
-                            <label className="block text-sm font-bold text-zinc-900 mb-2">
+                            <label className="block text-sm font-bold text-white mb-2">
                                 Passcode
                             </label>
                             <input
@@ -94,7 +94,7 @@ export default function AdminLogin() {
                                 required
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
-                                className="w-full px-4 py-3 rounded-xl border border-zinc-200 bg-zinc-50/50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition-all text-sm font-medium"
+                                className="w-full px-4 py-3 rounded-xl border border-zinc-200 bg-primary/50 focus:bg-primary focus:outline-none focus:ring-2 focus:ring-accent/20 focus:border-accent transition-all text-sm font-medium"
                                 placeholder="••••••••"
                             />
                         </div>
@@ -102,7 +102,7 @@ export default function AdminLogin() {
                         <button
                             type="submit"
                             disabled={loading}
-                            className="w-full flex justify-center py-3 px-4 border border-transparent rounded-xl shadow-sm text-sm font-bold text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                            className="w-full flex justify-center py-3 px-4 border border-transparent rounded-xl shadow-sm text-sm font-bold text-white bg-accent hover:bg-accent-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                         >
                             {loading ? <Loader2 className="w-5 h-5 animate-spin" /> : "Authenticate"}
                         </button>

@@ -38,7 +38,7 @@ function AnimatedInput({ label, ...props }: { label: string } & React.InputHTMLA
     const [isFocused, setIsFocused] = useState(false);
     return (
         <div className="space-y-2 group">
-            <label className="text-[10px] font-bold tracking-[0.2em] uppercase text-zinc-400 ml-1 transition-colors group-focus-within:text-indigo-600">{label}</label>
+            <label className="text-[10px] font-bold tracking-[0.2em] uppercase text-zinc-400 ml-1 transition-colors group-focus-within:text-accent">{label}</label>
             <div className="relative">
                 <input
                     {...props}
@@ -49,7 +49,7 @@ function AnimatedInput({ label, ...props }: { label: string } & React.InputHTMLA
                 <motion.div
                     initial={false}
                     animate={{ scaleX: isFocused ? 1 : 0, opacity: isFocused ? 1 : 0 }}
-                    className="absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-r from-indigo-500 via-violet-500 to-sky-500 z-20 origin-left rounded-full"
+                    className="absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-r from-accent via-accent-light to-accent z-20 origin-left rounded-full"
                     transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
                 />
             </div>
@@ -71,7 +71,7 @@ export default function Contact() {
     };
 
     return (
-        <div className="flex flex-col min-h-screen bg-white selection:bg-indigo-500/10">
+        <div className="flex flex-col min-h-screen bg-primary selection:bg-accent/10">
             {/* Ultra Header */}
             <section className="relative pt-40 pb-24 md:pt-60 md:pb-40 overflow-hidden">
                 <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(79,70,229,0.03)_0%,_transparent_70%)]" />
@@ -81,11 +81,11 @@ export default function Contact() {
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
                     >
-                        <h1 className="text-6xl md:text-8xl font-black text-zinc-950 tracking-tighter mb-8 leading-[0.9]">
+                        <h1 className="text-6xl md:text-8xl font-black text-white tracking-tighter mb-8 leading-[0.9]">
                             Scale your <br />
                             <span className="text-gradient-premium">Reach.</span>
                         </h1>
-                        <p className="text-xl md:text-2xl text-zinc-500 max-w-2xl font-medium leading-relaxed">
+                        <p className="text-xl md:text-2xl text-zinc-400 max-w-2xl font-medium leading-relaxed">
                             Connect with our infrastructure architects to build yours. We're ready to engineer your future distribution grid.
                         </p>
                     </motion.div>
@@ -104,26 +104,26 @@ export default function Contact() {
                             transition={{ duration: 1, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
                             className="lg:col-span-5 space-y-10"
                         >
-                            <SpotlightCard className="p-10 md:p-12 bg-white flex flex-col justify-between group">
+                            <SpotlightCard className="p-10 md:p-12 bg-primary flex flex-col justify-between group">
                                 <div>
                                     <div className="flex items-center gap-5 mb-10">
-                                        <div className="w-16 h-16 rounded-3xl bg-zinc-950 flex items-center justify-center shadow-2xl transition-transform duration-500 group-hover:scale-110">
+                                        <div className="w-16 h-16 rounded-3xl bg-primary-dark flex items-center justify-center shadow-2xl transition-transform duration-500 group-hover:scale-110">
                                             <Building2 className="w-8 h-8 text-white" />
                                         </div>
                                         <div>
-                                            <h2 className="text-3xl font-black text-zinc-900 tracking-tighter">Global HQ</h2>
+                                            <h2 className="text-3xl font-black text-white tracking-tighter">Global HQ</h2>
                                             <p className="text-xs font-bold text-zinc-400 uppercase tracking-widest mt-1"> राजस्थान, भारत</p>
                                         </div>
                                     </div>
 
                                     <div className="space-y-10">
                                         <div className="flex items-start gap-6 group/item">
-                                            <div className="w-12 h-12 rounded-2xl bg-indigo-50 flex items-center justify-center shrink-0 transition-colors group-hover/item:bg-indigo-100">
-                                                <Mail className="w-6 h-6 text-indigo-600" />
+                                            <div className="w-12 h-12 rounded-2xl bg-primary-light flex items-center justify-center shrink-0 transition-colors group-hover/item:bg-primary-light">
+                                                <Mail className="w-6 h-6 text-accent" />
                                             </div>
                                             <div>
                                                 <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-zinc-400 mb-2">Comms Node</p>
-                                                <a href="mailto:pavikadistributionnetwork@gmail.com" className="text-lg font-bold text-zinc-900 hover:text-indigo-600 transition-colors break-all">
+                                                <a href="mailto:pavikadistributionnetwork@gmail.com" className="text-lg font-bold text-white hover:text-accent transition-colors break-all">
                                                     pavikadistributionnetwork@gmail.com
                                                 </a>
                                             </div>
@@ -135,7 +135,7 @@ export default function Contact() {
                                             </div>
                                             <div>
                                                 <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-zinc-400 mb-2">Physical Node</p>
-                                                <p className="text-lg font-bold text-zinc-900 leading-tight">
+                                                <p className="text-lg font-bold text-white leading-tight">
                                                     Flat 108, Ground Floor, C-8, <br />
                                                     Parth Enclave, Ram Vihar, <br />
                                                     Jaipur, Rajasthan 302033
@@ -145,10 +145,10 @@ export default function Contact() {
                                     </div>
                                 </div>
 
-                                <div className="mt-20 pt-10 border-t border-zinc-100 flex items-center justify-between">
+                                <div className="mt-20 pt-10 border-t border-accent/10 flex items-center justify-between">
                                     <div className="flex -space-x-2">
                                         {[1, 2, 3, 4].map(i => (
-                                            <div key={i} className="w-10 h-10 rounded-full border-4 border-white bg-zinc-100 flex items-center justify-center text-[10px] font-bold text-zinc-500">
+                                            <div key={i} className="w-10 h-10 rounded-full border-4 border-white bg-zinc-100 flex items-center justify-center text-[10px] font-bold text-zinc-400">
                                                 {String.fromCharCode(64 + i)}
                                             </div>
                                         ))}
@@ -165,7 +165,7 @@ export default function Contact() {
                             transition={{ duration: 1, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
                             className="lg:col-span-7"
                         >
-                            <SpotlightCard className="p-10 md:p-14 bg-white h-full relative overflow-hidden">
+                            <SpotlightCard className="p-10 md:p-14 bg-primary h-full relative overflow-hidden">
                                 <AnimatePresence mode="wait">
                                     {isSubmitted ? (
                                         <motion.div
@@ -195,13 +195,13 @@ export default function Contact() {
                                                     </motion.div>
                                                 ))}
                                             </div>
-                                            <h3 className="text-4xl font-black text-zinc-950 mb-4 tracking-tighter">Transmission Successful</h3>
-                                            <p className="text-zinc-500 text-xl font-medium max-w-sm mx-auto leading-relaxed">
+                                            <h3 className="text-4xl font-black text-white mb-4 tracking-tighter">Transmission Successful</h3>
+                                            <p className="text-zinc-400 text-xl font-medium max-w-sm mx-auto leading-relaxed">
                                                 Your request has been routed to our core engineers. Standby for initialization.
                                             </p>
                                             <button
                                                 onClick={() => setIsSubmitted(false)}
-                                                className="mt-12 text-sm font-bold text-indigo-600 hover:text-indigo-700 transition-colors uppercase tracking-widest"
+                                                className="mt-12 text-sm font-bold text-accent hover:text-accent-dark transition-colors uppercase tracking-widest"
                                             >
                                                 Send another packet
                                             </button>
@@ -214,8 +214,8 @@ export default function Contact() {
                                             exit={{ opacity: 0, scale: 0.95, filter: "blur(10px)" }}
                                         >
                                             <div className="mb-14">
-                                                <h2 className="text-4xl font-black text-zinc-950 tracking-tighter mb-4">Initialize Channel</h2>
-                                                <p className="text-zinc-500 text-lg font-medium">Define your operational parameters below.</p>
+                                                <h2 className="text-4xl font-black text-white tracking-tighter mb-4">Initialize Channel</h2>
+                                                <p className="text-zinc-400 text-lg font-medium">Define your operational parameters below.</p>
                                             </div>
 
                                             <form onSubmit={handleSubmit} className="space-y-8">

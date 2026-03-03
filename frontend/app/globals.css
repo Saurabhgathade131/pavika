@@ -4,20 +4,27 @@
   --font-heading: var(--font-heading), ui-sans-serif, system-ui, sans-serif;
   --font-body: var(--font-body), ui-sans-serif, system-ui, sans-serif;
 
-  --color-accent-primary: #4f46e5;
-  --color-accent-secondary: #0ea5e9;
-  --color-accent-tertiary: #8b5cf6;
+  --color-primary: #0a0f33;
+  --color-primary-light: #1a1f55;
+  --color-primary-dark: #05081c;
+  --color-accent: #d4af37;
+  --color-accent-light: #e5c07b;
+  --color-accent-dark: #b8962e;
 
-  --shadow-premium: 0 1px 2px rgba(0, 0, 0, 0.02), 0 4px 12px rgba(0, 0, 0, 0.03), 0 12px 24px rgba(0, 0, 0, 0.04);
-  --shadow-premium-hover: 0 1px 2px rgba(0, 0, 0, 0.02), 0 8px 16px rgba(0, 0, 0, 0.04), 0 24px 48px rgba(0, 0, 0, 0.06);
+  --color-accent-primary: var(--color-accent);
+  --color-accent-secondary: var(--color-accent-light);
+  --color-accent-tertiary: var(--color-accent-dark);
+
+  --shadow-premium: 0 1px 2px rgba(0, 0, 0, 0.2), 0 4px 12px rgba(0, 0, 0, 0.3), 0 12px 24px rgba(0, 0, 0, 0.4);
+  --shadow-premium-hover: 0 1px 2px rgba(0, 0, 0, 0.3), 0 8px 16px rgba(0, 0, 0, 0.4), 0 24px 48px rgba(0, 0, 0, 0.6);
 
   --animate-gradient-slow: gradient-x 8s ease infinite;
 }
 
 @layer base {
   body {
-    background-color: #ffffff;
-    color: #09090b;
+    background-color: var(--color-primary);
+    color: #f8fafc;
     font-family: var(--font-body);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -38,9 +45,9 @@
   /* Ultra-Premium Refined Glassmorphism */
   .glass-premium {
     backdrop-filter: blur(12px);
-    background-color: rgba(255, 255, 255, 0.7);
-    border: 1px solid rgba(255, 255, 255, 0.4);
-    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.3);
+    background-color: rgba(10, 15, 51, 0.6);
+    border: 1px solid rgba(212, 175, 55, 0.15);
+    box-shadow: inset 0 0 0 1px rgba(212, 175, 55, 0.05);
   }
 
   /* Bento Card V2 - Multi-layered depth and subtle transition */
@@ -49,13 +56,13 @@
     transition-property: all;
     transition-duration: 500ms;
     transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
-    border: 1px solid rgba(0, 0, 0, 0.05);
-    background-color: #ffffff;
+    border: 1px solid rgba(212, 175, 55, 0.1);
+    background-color: var(--color-primary-light);
     box-shadow: var(--shadow-premium);
   }
 
   .bento-card:hover {
-    border-color: rgba(0, 0, 0, 0.1);
+    border-color: rgba(212, 175, 55, 0.3);
     transform: translateY(-4px);
     box-shadow: var(--shadow-premium-hover);
   }
@@ -71,7 +78,7 @@
     position: absolute;
     inset: 0;
     background: radial-gradient(600px circle at var(--mouse-x, 0) var(--mouse-y, 0),
-        rgba(79, 70, 229, 0.06),
+        rgba(212, 175, 55, 0.08),
         transparent 40%);
     z-index: 0;
     pointer-events: none;
@@ -94,9 +101,9 @@
     border-radius: 9999px;
     font-weight: 600;
     transition: all 300ms;
-    background: linear-gradient(135deg, #4f46e5, #8b5cf6);
-    color: white;
-    box-shadow: 0 10px 20px -5px rgba(79, 70, 229, 0.4);
+    background: linear-gradient(135deg, var(--color-accent), var(--color-accent-dark));
+    color: var(--color-primary-dark);
+    box-shadow: 0 10px 20px -5px rgba(212, 175, 55, 0.4);
   }
 
   .btn-premium:active {
@@ -119,7 +126,7 @@
   .btn-premium:hover {
     transform: translateY(-2px);
     box-shadow: var(--shadow-premium-hover);
-    outline: 4px solid rgba(79, 70, 229, 0.1);
+    outline: 4px solid rgba(212, 175, 55, 0.2);
   }
 
   /* Premium Form Input V2 */
@@ -127,18 +134,18 @@
     width: 100%;
     padding: 1rem 1.25rem;
     border-radius: 1rem;
-    border: 1px solid #e4e4e7;
-    background-color: #ffffff;
-    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(212, 175, 55, 0.2);
+    background-color: var(--color-primary-light);
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
     transition: all 300ms;
     outline: none;
     font-weight: 500;
-    color: #18181b;
+    color: #f8fafc;
   }
 
   .input-premium:focus {
-    border-color: #4f46e5;
-    box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.05);
+    border-color: var(--color-accent);
+    box-shadow: 0 0 0 4px rgba(212, 175, 55, 0.1);
   }
 
   /* Text Gradient V2 */
@@ -146,7 +153,7 @@
     background-clip: text;
     -webkit-background-clip: text;
     color: transparent;
-    background-image: linear-gradient(to right, #4f46e5, #7c3aed, #0ea5e9);
+    background-image: linear-gradient(to right, var(--color-accent-light), var(--color-accent), var(--color-accent-dark));
     background-size: 200% auto;
     animation: gradient-x 8s ease infinite;
   }
@@ -155,7 +162,7 @@
     background-clip: text;
     -webkit-background-clip: text;
     color: transparent;
-    background-image: linear-gradient(to right, #2563eb, #38bdf8);
+    background-image: linear-gradient(to right, var(--color-accent-light), var(--color-accent));
   }
 }
 
@@ -167,12 +174,12 @@
     width: 100%;
     height: 100%;
     z-index: -1;
-    background-color: #ffffff;
+    background-color: var(--color-primary);
     background-image:
-      radial-gradient(at 0% 0%, rgba(79, 70, 229, 0.07) 0px, transparent 50%),
-      radial-gradient(at 100% 0%, rgba(14, 165, 233, 0.07) 0px, transparent 50%),
-      radial-gradient(at 100% 100%, rgba(139, 92, 246, 0.07) 0px, transparent 50%),
-      radial-gradient(at 0% 100%, rgba(79, 70, 229, 0.07) 0px, transparent 50%);
+      radial-gradient(at 0% 0%, rgba(212, 175, 55, 0.05) 0px, transparent 50%),
+      radial-gradient(at 100% 0%, rgba(26, 31, 85, 0.5) 0px, transparent 50%),
+      radial-gradient(at 100% 100%, rgba(212, 175, 55, 0.05) 0px, transparent 50%),
+      radial-gradient(at 0% 100%, rgba(26, 31, 85, 0.5) 0px, transparent 50%);
     filter: blur(100px);
     opacity: 0.8;
     animation: mesh-float 20s ease-in-out infinite alternate;
@@ -225,17 +232,17 @@
 }
 
 ::-webkit-scrollbar-track {
-  background-color: #fafafa;
+  background-color: var(--color-primary);
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: #e4e4e7;
+  background-color: var(--color-primary-light);
   border-radius: 9999px;
-  border: 2px solid #fafafa;
+  border: 2px solid var(--color-primary);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background-color: #d4d4d8;
+  background-color: rgba(212, 175, 55, 0.5);
 }
 
 /* Remove default blue highlight on mobile */

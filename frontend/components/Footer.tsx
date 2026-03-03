@@ -4,9 +4,9 @@ import { ArrowUpRight } from "lucide-react";
 
 export default function Footer() {
     return (
-        <footer className="bg-[#09090b] text-zinc-400 border-t border-white/5 relative overflow-hidden">
+        <footer className="bg-[var(--color-primary)] text-zinc-400 border-t border-white/5 relative overflow-hidden">
             {/* Subtle top glow */}
-            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1/2 h-[1px] bg-gradient-to-r from-transparent via-indigo-500/50 to-transparent" />
+            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1/2 h-[1px] bg-gradient-to-r from-transparent via-[var(--color-accent)]/50 to-transparent" />
 
             <div className="container mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
                 <div className="xl:grid xl:grid-cols-4 xl:gap-12">
@@ -43,13 +43,13 @@ export default function Footer() {
                                 <li>
                                     <Link href="/#services" className="text-sm leading-6 flex items-center group w-fit">
                                         <span className="hover:text-white transition-colors">Core Services</span>
-                                        <ArrowUpRight className="w-3 h-3 ml-1 opacity-0 -translate-y-1 translate-x-1 group-hover:opacity-100 group-hover:translate-y-0 group-hover:translate-x-0 transition-all text-indigo-400" />
+                                        <ArrowUpRight className="w-3 h-3 ml-1 opacity-0 -translate-y-1 translate-x-1 group-hover:opacity-100 group-hover:translate-y-0 group-hover:translate-x-0 transition-all text-[var(--color-accent)]" />
                                     </Link>
                                 </li>
                                 <li>
                                     <Link href="/admin" className="text-sm leading-6 flex items-center group w-fit">
                                         <span className="hover:text-white transition-colors">Admin Portal</span>
-                                        <ArrowUpRight className="w-3 h-3 ml-1 opacity-0 -translate-y-1 translate-x-1 group-hover:opacity-100 group-hover:translate-y-0 group-hover:translate-x-0 transition-all text-indigo-400" />
+                                        <ArrowUpRight className="w-3 h-3 ml-1 opacity-0 -translate-y-1 translate-x-1 group-hover:opacity-100 group-hover:translate-y-0 group-hover:translate-x-0 transition-all text-[var(--color-accent)]" />
                                     </Link>
                                 </li>
                                 <li>
