@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Lock, ChevronRight, TrendingDown, TrendingUp } from "lucide-react";
+import { auth } from "../../../auth";
 
 const categoryData = {
   "mild-steel": {
@@ -8,8 +9,8 @@ const categoryData = {
     products: [
       { id: "secondary-tmt", name: "Secondary TMT Fe 500D 12mm", price: "₹50,900/MT", origin: "Delhi", change: "+0.5%", up: true, locked: false },
       { id: "secondary-tmt-fortune", name: "Secondary TMT Fe 500D 12mm", price: "₹50,100/MT", origin: "Mumbai", change: "0%", up: true, locked: false },
-      { id: "secondary-tmt-550", name: "Secondary TMT Fe 550D 8-32mm", price: "Login to View", origin: "Wardha", change: "", up: true, locked: true },
-      { id: "hr-coils", name: "HR Coils 2.5mm & Above", price: "Login to View", origin: "Raipur", change: "", up: false, locked: true },
+      { id: "secondary-tmt-550", name: "Secondary TMT Fe 550D 8-32mm", price: "₹52,400/MT", origin: "Wardha", change: "+1.2%", up: true, locked: true },
+      { id: "hr-coils", name: "HR Coils 2.5mm & Above", price: "₹56,200/MT", origin: "Raipur", change: "-0.4%", up: false, locked: true },
     ],
     news: [
       { title: "AM/NS to start work on mega Andhra plant next week", source: "The Economic Times", time: "3 hours ago" },
@@ -22,7 +23,7 @@ const categoryData = {
     products: [
       { id: "aluminium-ingot", name: "Aluminium Ingot", price: "₹220/Kg", origin: "Mumbai", change: "-1.2%", up: false, locked: false },
       { id: "copper-wire", name: "Copper Wire Rod", price: "₹780/Kg", origin: "Delhi", change: "+0.8%", up: true, locked: false },
-      { id: "zinc-ingot", name: "Zinc Ingot", price: "Login to View", origin: "Kolkata", change: "", up: true, locked: true },
+      { id: "zinc-ingot", name: "Zinc Ingot", price: "₹245/Kg", origin: "Kolkata", change: "+0.2%", up: true, locked: true },
     ],
     news: [
       { title: "Global copper deficit expected to widen in 2026", source: "Reuters", time: "5 hours ago" },
@@ -32,13 +33,16 @@ const categoryData = {
 
 export default async function CategoryPage({ params }: { params: { slug: string } }) {
   const { slug } = await params;
+  const session = await auth();
+  const isAuthenticated = !!session;
+
   const rawTitle = slug.split("-").map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(" ");
   // @ts-ignore
   const data = categoryData[slug] || {
     title: `${rawTitle} Prices Today`,
     range: "Prices Vary | Live Rates",
     products: [
-      { id: "sample", name: `${rawTitle} Sample Product`, price: "Login to View", origin: "Various", change: "", up: true, locked: true },
+      { id: "sample", name: `${rawTitle} Sample Product`, price: "₹45,000/MT", origin: "Various", change: "+1.0%", up: true, locked: true },
     ],
     news: [
       { title: `Latest updates in the ${rawTitle} sector`, source: "Market Watch", time: "Just now" }
@@ -75,35 +79,40 @@ export default async function CategoryPage({ params }: { params: { slug: string 
               {rawTitle} Most Viewed Prices
             </h2>
             <div className="divide-y divide-gray-200">
-              {data.products.map((p: any, idx: number) => (
-                <div key={idx} className="p-4 flex flex-col sm:flex-row items-start sm:items-center justify-between hover:bg-gray-50">
-                  <div className="flex-1">
-                     <Link href={`/prices/${slug}/${p.id}`} className="font-bold text-[#0b2545] hover:text-[var(--color-accent)] text-lg">
-                       {p.name}
-                     </Link>
-                     <p className="text-sm text-gray-500 mt-1">Origin: <span className="font-bold text-gray-700">{p.origin}</span></p>
+              {data.products.map((p: any, idx: number) => {
+                const isLocked = p.locked && !isAuthenticated;
+                return (
+                  <div key={idx} className="p-4 flex flex-col sm:flex-row items-start sm:items-center justify-between hover:bg-gray-50">
+                    <div className="flex-1">
+                       <Link href={`/prices/${slug}/${p.id}`} className="font-bold text-[#0b2545] hover:text-[var(--color-accent)] text-lg">
+                         {p.name}
+                       </Link>
+                       <p className="text-sm text-gray-500 mt-1">Origin: <span className="font-bold text-gray-700">{p.origin}</span></p>
+                    </div>
+                    <div className="mt-4 sm:mt-0 flex flex-col items-end">
+                      {isLocked ? (
+                        <Link href="/login" className="btn-orange flex items-center gap-2">
+                          <Lock className="w-4 h-4" /> Login To View
+                        </Link>
+                      ) : (
+                        <>
+                          <span className="text-xl font-black text-gray-800">{p.price}</span>
+                          <span className={`text-xs font-bold flex items-center ${p.up ? 'text-green-600' : 'text-red-500'}`}>
+                            {p.up ? <TrendingUp className="w-3 h-3 mr-0.5" /> : <TrendingDown className="w-3 h-3 mr-0.5" />}
+                            {p.change} (3 hours ago)
+                          </span>
+                        </>
+                      )}
+                    </div>
                   </div>
-                  <div className="mt-4 sm:mt-0 flex flex-col items-end">
-                    {p.locked ? (
-                      <Link href="/login" className="btn-orange flex items-center gap-2">
-                        <Lock className="w-4 h-4" /> Login To View
-                      </Link>
-                    ) : (
-                      <>
-                        <span className="text-xl font-black text-gray-800">{p.price}</span>
-                        <span className={`text-xs font-bold flex items-center ${p.up ? 'text-green-600' : 'text-red-500'}`}>
-                          {p.up ? <TrendingUp className="w-3 h-3 mr-0.5" /> : <TrendingDown className="w-3 h-3 mr-0.5" />}
-                          {p.change} (3 hours ago)
-                        </span>
-                      </>
-                    )}
-                  </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
-            <div className="p-4 bg-gray-50 border-t border-gray-200 text-center">
-              <Link href="/login" className="text-[var(--color-accent)] font-bold hover:underline">View All {rawTitle} Prices</Link>
-            </div>
+            {!isAuthenticated && (
+              <div className="p-4 bg-gray-50 border-t border-gray-200 text-center">
+                <Link href="/login" className="text-[var(--color-accent)] font-bold hover:underline">View All {rawTitle} Prices</Link>
+              </div>
+            )}
           </div>
         </div>
 

@@ -1,8 +1,12 @@
 import Link from "next/link";
-import { Search, MapPin, User, ChevronDown, Menu } from "lucide-react";
+import { Search, MapPin, User, ChevronDown, Menu, LogOut } from "lucide-react";
 import Image from "next/image";
+import { auth } from "../auth";
+import { logoutUser } from "../app/actions";
 
-export default function Navbar() {
+export default async function Navbar() {
+  const session = await auth();
+  
   return (
     <header className="bg-white border-b border-gray-200 sticky top-0 z-50 shadow-sm">
       {/* Top Utility Bar */}
@@ -57,10 +61,24 @@ export default function Navbar() {
              </span>
           </div>
           
-          <Link href="/login" className="flex flex-col items-center text-gray-700 hover:text-[var(--color-accent)] transition-colors">
-            <User className="w-6 h-6 mb-0.5" />
-            <span className="text-xs font-bold">Login / Sign Up</span>
-          </Link>
+          {session ? (
+            <div className="flex items-center gap-4">
+               <div className="flex flex-col items-end">
+                 <span className="text-xs font-bold text-[#0b2545]">{session.user?.name || "User"}</span>
+                 <span className="text-[10px] text-gray-500">{session.user?.email}</span>
+               </div>
+               <form action={logoutUser}>
+                 <button type="submit" className="text-gray-500 hover:text-red-500 transition-colors" title="Log Out">
+                   <LogOut className="w-5 h-5" />
+                 </button>
+               </form>
+            </div>
+          ) : (
+            <Link href="/login" className="flex flex-col items-center text-gray-700 hover:text-[var(--color-accent)] transition-colors">
+              <User className="w-6 h-6 mb-0.5" />
+              <span className="text-xs font-bold">Login / Sign Up</span>
+            </Link>
+          )}
         </div>
       </div>
 
