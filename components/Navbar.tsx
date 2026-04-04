@@ -11,8 +11,8 @@ export default function Navbar() {
       <div className="bg-[#0b2545] text-white text-xs hidden md:block">
         <div className="container mx-auto px-4 max-w-7xl h-8 flex items-center justify-between">
           <div className="flex gap-4">
-            <span>Call us: <span className="font-bold">1800-889-9999</span></span>
-            <span>Email: <span className="font-bold">contact@pavika.com</span></span>
+            <span>Call us: <span className="font-bold">7300015127</span></span>
+            <span>Email: <span className="font-bold">sales@pavikadistributionnetwork.com</span></span>
           </div>
           <div className="flex gap-4">
             <Link href="#" className="hover:underline">Track Order</Link>

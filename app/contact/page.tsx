@@ -25,14 +25,18 @@ export default function ContactPage() {
                    Haryana 122003, India
                  </p>
                </div>
-               <div>
-                 <h3 className="font-bold text-slate-900 text-lg flex items-center gap-2 mb-3"><Phone className="w-5 h-5 text-[var(--color-accent)]"/> Phone Support</h3>
-                 <p className="text-slate-600 font-medium">1800-889-9999 (Toll Free)</p>
-               </div>
-               <div>
-                 <h3 className="font-bold text-slate-900 text-lg flex items-center gap-2 mb-3"><Mail className="w-5 h-5 text-[var(--color-accent)]"/> Email</h3>
-                 <p className="text-[var(--color-accent)] font-bold">contact@pavikanetwork.com</p>
-               </div>
+                <div>
+                  <h3 className="font-bold text-slate-900 text-lg flex items-center gap-2 mb-3"><Phone className="w-5 h-5 text-[var(--color-accent)]"/> Phone Support</h3>
+                  <p className="text-slate-600 font-medium">+91 73000 15127</p>
+                </div>
+                <div>
+                  <h3 className="font-bold text-slate-900 text-lg flex items-center gap-2 mb-3"><Mail className="w-5 h-5 text-[var(--color-accent)]"/> Official Emails</h3>
+                  <div className="space-y-2">
+                    <p className="text-[var(--color-accent)] font-bold text-sm">Sales: sales@pavikadistributionnetwork.com</p>
+                    <p className="text-[var(--color-accent)] font-bold text-sm">Director: jay@pavikadistributionnetwork.com</p>
+                    <p className="text-[var(--color-accent)] font-bold text-xs opacity-75">Corporate: pavikadistributionnetwork@pavikadistributionnetwork.com</p>
+                  </div>
+                </div>
              </div>
 
              <div className="bg-slate-50 p-6 rounded-2xl border border-slate-200">

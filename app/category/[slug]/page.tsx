@@ -48,12 +48,29 @@ export default async function CategoryPage({ params }: { params: { slug: string 
   return (
     <main className="min-h-screen bg-[#f4f5f9] pb-20">
       
+      {/* Category Hero Header */}
+      <div className="relative h-[300px] bg-[#0b2545] overflow-hidden">
+        <img 
+          src={`/categories/${slug === 'agri' ? 'agriculture' : slug}.png`} 
+          alt={rawTitle} 
+          className="w-full h-full object-cover opacity-40"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#0b2545] to-transparent" />
+        <div className="absolute inset-0 flex items-center justify-center">
+          <div className="text-center">
+             <h1 className="text-4xl md:text-6xl font-black text-white mb-2 tracking-tighter uppercase">{rawTitle}</h1>
+             <div className="h-1.5 w-24 bg-[var(--color-accent)] mx-auto rounded-full" />
+             <p className="text-white/80 font-bold mt-4 tracking-widest text-sm uppercase">Official Distribution Channel</p>
+          </div>
+        </div>
+      </div>
+
       {/* Breadcrumbs */}
       <div className="bg-white border-b border-gray-200 py-3 text-xs text-gray-500">
         <div className="container mx-auto px-4 max-w-7xl flex items-center gap-2">
           <Link href="/" className="hover:text-[var(--color-accent)]">Home</Link>
           <ChevronRight className="w-3 h-3" />
-          <Link href="/category" className="hover:text-[var(--color-accent)]">Category</Link>
+          <Link href="/category" className="hover:text-[var(--color-accent)]">Category Catalog</Link>
           <ChevronRight className="w-3 h-3" />
           <span className="text-[#0b2545] font-bold">{rawTitle}</span>
         </div>
@@ -65,7 +82,7 @@ export default async function CategoryPage({ params }: { params: { slug: string 
         <div className="w-full lg:w-3/4">
           <div className="flat-card p-6 mb-6 flex flex-col sm:flex-row justify-between items-start sm:items-center">
             <div>
-              <h1 className="text-2xl font-black text-[#0b2545]">{data.title}</h1>
+              <h2 className="text-2xl font-black text-[#0b2545]">{data.title}</h2>
               <p className="text-[var(--color-accent)] font-bold text-lg mt-1">{data.range}</p>
             </div>
           </div>
