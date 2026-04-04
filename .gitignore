@@ -2,6 +2,7 @@
 
 # --- Frontend (Node/Next.js) ---
 frontend/node_modules/
+frontend_legacy_backup/
 frontend/.pnp
 frontend/.pnp.*
 frontend/.yarn/*
