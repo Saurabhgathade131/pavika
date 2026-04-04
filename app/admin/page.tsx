@@ -85,7 +85,7 @@ function SpotlightCard({ children, className = "" }: { children: React.ReactNode
 
 export default function AdminDashboard() {
     const [activeTab, setActiveTab] = useState("dashboard");
-    const [authVerified, setAuthVerified] = useState(false);
+    const [authVerified, setAuthVerified] = useState(true);
     const [clients, setClients] = useState<any[]>([]);
     const [loadingClients, setLoadingClients] = useState(false);
     const [isAddingClient, setIsAddingClient] = useState(false);
@@ -96,13 +96,10 @@ export default function AdminDashboard() {
     });
     const router = useRouter();
 
-    const fetchClients = async () => {
+    const fetchLeads = async () => {
         setLoadingClients(true);
         try {
-            const token = localStorage.getItem("admin_token");
-            const res = await fetch("http://127.0.0.1:8000/api/clients/", {
-                headers: { "Authorization": `Bearer ${token}` }
-            });
+            const res = await fetch("/api/leads");
             if (res.ok) setClients(await res.json());
         } catch (err) {
             console.error(err);
@@ -123,7 +120,7 @@ export default function AdminDashboard() {
             if (res.ok) {
                 setIsAddingClient(false);
                 setNewClient({ business_name: "", contact_name: "", contact_email: "", contact_phone: "", service_tier: "Standard" });
-                fetchClients();
+                fetchLeads();
             }
         } catch (err) {
             console.error(err);
@@ -131,24 +128,19 @@ export default function AdminDashboard() {
     };
 
     useEffect(() => {
-        // Enforce RBAC
-        const token = localStorage.getItem("admin_token");
-        if (!token) {
-            router.push("/admin/login");
-        } else {
-            setAuthVerified(true);
-            fetchClients();
-        }
-    }, [router]);
+        // Direct access for simplified management
+        fetchLeads();
+    }, []);
 
     const handleLogout = () => {
         localStorage.removeItem("admin_token");
         router.push("/admin/login");
     };
 
-    if (!authVerified) {
-        return <div className="min-h-screen bg-primary flex items-center justify-center">Verifying credentials...</div>;
-    }
+    // Direct access for simplified management
+    useEffect(() => {
+        fetchLeads();
+    }, []);
 
     return (
         <div className="min-h-screen bg-primary/50 pt-28 pb-20 selection:bg-accent/10">
@@ -193,8 +185,8 @@ export default function AdminDashboard() {
                             <nav className="space-y-2">
                                 {[
                                     { id: 'dashboard', label: 'Overview', icon: LayoutDashboard },
-                                    { id: 'clients', label: 'Client Management', icon: Users },
-                                    { id: 'media', label: 'Asset Library', icon: ImageIcon, count: 4 },
+                                    { id: 'clients', label: 'Inquiries & Leads', icon: Users },
+                                    { id: 'media', label: 'Asset Library', icon: ImageIcon, count: 9 },
                                     { id: 'settings', label: 'Protocol Config', icon: Settings },
                                 ].map((tab) => (
                                     <button
@@ -314,16 +306,14 @@ export default function AdminDashboard() {
 
                                 {activeTab === "clients" && (
                                     <div className="space-y-6 animate-in fade-in slide-in-from-bottom-4 duration-500 p-10 md:p-14">
-                                        <div className="flex items-center justify-between mb-8 border-b border-accent/10 pb-10">
+                                 <div className="flex items-center justify-between mb-8 border-b border-accent/10 pb-10">
                                             <div>
-                                                <h2 className="text-3xl font-black tracking-tight text-white mb-2">Registered Businesses</h2>
-                                                <p className="text-sm font-medium text-zinc-400">Manage network accounts and tier access.</p>
+                                                <h2 className="text-3xl font-black tracking-tight text-white mb-2">Business Inquiries</h2>
+                                                <p className="text-sm font-medium text-zinc-400">Manage procurement leads and service requests.</p>
                                             </div>
-                                            {!isAddingClient && (
-                                                <button onClick={() => setIsAddingClient(true)} className="flex items-center gap-2 bg-accent text-white px-5 py-2.5 rounded-xl font-bold hover:bg-accent-dark transition-colors shadow-sm">
-                                                    <Plus className="w-5 h-5" /> Onboard Client
-                                                </button>
-                                            )}
+                                            <button onClick={() => fetchLeads()} className="flex items-center gap-2 bg-accent text-white px-5 py-2.5 rounded-xl font-bold hover:bg-accent-dark transition-colors shadow-sm">
+                                                Refresh Leads
+                                            </button>
                                         </div>
 
                                         {isAddingClient ? (
@@ -375,28 +365,29 @@ export default function AdminDashboard() {
                                                         <table className="w-full text-left border-collapse">
                                                             <thead>
                                                                 <tr className="border-b border-accent/10">
-                                                                    <th className="py-4 px-4 font-bold text-white">Business</th>
-                                                                    <th className="py-4 px-4 font-bold text-white">Contact</th>
-                                                                    <th className="py-4 px-4 font-bold text-white text-center">Tier</th>
-                                                                    <th className="py-4 px-4 font-bold text-white text-center">Status</th>
+                                                                    <th className="py-4 px-4 font-bold text-white uppercase text-[10px] tracking-widest">Business/Name</th>
+                                                                    <th className="py-4 px-4 font-bold text-white uppercase text-[10px] tracking-widest">Requirements</th>
+                                                                    <th className="py-4 px-4 font-bold text-white text-center uppercase text-[10px] tracking-widest">Date</th>
+                                                                    <th className="py-4 px-4 font-bold text-white text-center uppercase text-[10px] tracking-widest">Status</th>
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
-                                                                {clients.map(client => (
-                                                                    <tr key={client.id} className="border-b border-zinc-50 hover:bg-primary/50 transition-colors">
-                                                                        <td className="py-4 px-4">
-                                                                            <div className="font-bold text-white">{client.business_name}</div>
-                                                                            <div className="text-xs text-zinc-400 font-mono mt-0.5">ID: {client.id}</div>
+                                                                {clients.map(lead => (
+                                                                    <tr key={lead.id} className="border-b border-accent/5 hover:bg-accent/5 transition-colors">
+                                                                        <td className="py-6 px-4">
+                                                                            <div className="font-bold text-white">{lead.name}</div>
+                                                                            <div className="text-xs text-zinc-400 mt-1">{lead.email}</div>
                                                                         </td>
-                                                                        <td className="py-4 px-4">
-                                                                            <div className="text-sm text-zinc-300 font-medium">{client.contact_name}</div>
-                                                                            <div className="text-xs text-zinc-400">{client.contact_email}</div>
+                                                                        <td className="py-6 px-4 max-w-md">
+                                                                            <p className="text-sm text-zinc-300 leading-relaxed italic">"{lead.requirements}"</p>
                                                                         </td>
-                                                                        <td className="py-4 px-4 text-center">
-                                                                            <span className="inline-block px-3 py-1 bg-primary-light text-accent-dark rounded-full text-xs font-bold">{client.service_tier}</span>
+                                                                        <td className="py-6 px-4 text-center">
+                                                                            <span className="text-xs text-zinc-400 font-mono">{new Date(lead.date).toLocaleDateString()}</span>
                                                                         </td>
-                                                                        <td className="py-4 px-4 text-center">
-                                                                            <span className="inline-block px-3 py-1 bg-emerald-50 text-emerald-700 rounded-full text-xs font-bold">{client.status}</span>
+                                                                        <td className="py-6 px-4 text-center">
+                                                                            <span className={`inline-block px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-tighter ${
+                                                                                lead.status === 'New' ? 'bg-accent/20 text-accent' : 'bg-emerald-500/20 text-emerald-400'
+                                                                            }`}>{lead.status}</span>
                                                                         </td>
                                                                     </tr>
                                                                 ))}

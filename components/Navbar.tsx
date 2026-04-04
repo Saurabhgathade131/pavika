@@ -59,9 +59,8 @@ export default function Navbar() {
              </span>
           </div>
           
-          <Link href="/login" className="flex flex-col items-center text-gray-700 hover:text-[var(--color-accent)] transition-colors">
-            <User className="w-6 h-6 mb-0.5" />
-            <span className="text-xs font-bold">Login / Sign Up</span>
+          <Link href="/contact" className="btn-premium py-2 px-6 text-xs uppercase tracking-widest font-black transition-all">
+            Get Quote
           </Link>
         </div>
       </div>
