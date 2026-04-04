@@ -22,11 +22,11 @@ export default function Home() {
       {/* Simple Ticker */}
       <div className="bg-white border-b border-gray-200 overflow-hidden text-xs py-2 shadow-sm">
         <div className="flex animate-marquee whitespace-nowrap gap-8">
-           <span className="font-bold text-gray-800">Aluminium Ingot (Mumbai): <span className="text-red-500">₹220/Kg</span></span>
-           <span className="font-bold text-gray-800">Secondary TMT (Delhi): <span className="text-green-600">₹50,900/MT</span></span>
-           <span className="font-bold text-gray-800">Bitumen VG30 (Kandla): <span className="text-green-600">₹45,500/MT</span></span>
-           <span className="font-bold text-gray-800">PVC (Mundra): <span className="text-green-600">₹85/Kg</span></span>
-           <span className="font-bold text-gray-800">HR Coils (Raipur): <span className="text-red-500">₹55,000/MT</span></span>
+           <span className="font-bold text-gray-800">Aluminium Ingot (Mumbai): <span className="text-blue-600">Contact for Price</span></span>
+           <span className="font-bold text-gray-800">Secondary TMT (Delhi): <span className="text-blue-600">Contact for Price</span></span>
+           <span className="font-bold text-gray-800">Bitumen VG30 (Kandla): <span className="text-blue-600">Contact for Price</span></span>
+           <span className="font-bold text-gray-800">PVC (Mundra): <span className="text-blue-600">Contact for Price</span></span>
+           <span className="font-bold text-gray-800">HR Coils (Raipur): <span className="text-blue-600">Contact for Price</span></span>
         </div>
       </div>
 
@@ -38,10 +38,10 @@ export default function Home() {
               India's Largest B2B Raw Materials Procurement & Credit Platform
             </h1>
             <p className="text-lg text-gray-600 mb-8">
-              Get latest raw materials prices, news and instant quotes for 500+ Categories across Steel, Aluminium, Agri and more.
+              Get instant quotes for 500+ Categories across Steel, Aluminium, Agri and more. Contact us for the best rates.
             </p>
             <div className="flex gap-4">
-              <Link href="/login" className="btn-orange text-base px-8 py-3">
+              <Link href="/contact" className="btn-orange text-base px-8 py-3">
                 Get Instant Quotes
               </Link>
               <Link href="#categories" className="btn-outline text-base px-8 py-3 bg-white">

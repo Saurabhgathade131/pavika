@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Lock, TrendingUp, TrendingDown, ChevronRight, Building2, MapPin } from "lucide-react";
+import { ChevronRight, Building2, MapPin } from "lucide-react";
 
 export default async function ProductPricingPage({ params }: { params: { category: string, slug: string } }) {
   const { category, slug } = await params;
@@ -8,12 +8,12 @@ export default async function ProductPricingPage({ params }: { params: { categor
   const productTitle = slug.split("-").map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(" ");
 
   const mockPrices = [
-    { location: "Delhi", supplier: "NEXUS Core", price: "₹50,900/MT", change: "+0.5%", up: true, locked: false },
-    { location: "Delhi", supplier: "VORTEX Metals", price: "₹50,100/MT", change: "0%", up: true, locked: false },
-    { location: "Gurugram", supplier: "B Index", price: "Login to View", change: "", up: true, locked: true },
-    { location: "Ahmedabad", supplier: "Vibrant Core", price: "Login to View", change: "", up: true, locked: true },
-    { location: "Mumbai", supplier: "Jai Balaji", price: "Login to View", change: "", up: false, locked: true },
-    { location: "Wardha", supplier: "Sangam Steel", price: "Login to View", change: "", up: true, locked: true },
+    { location: "Delhi", supplier: "NEXUS Core" },
+    { location: "Delhi", supplier: "VORTEX Metals" },
+    { location: "Gurugram", supplier: "B Index" },
+    { location: "Ahmedabad", supplier: "Vibrant Core" },
+    { location: "Mumbai", supplier: "Jai Balaji" },
+    { location: "Wardha", supplier: "Sangam Steel" },
   ];
 
   return (
@@ -48,7 +48,7 @@ export default async function ProductPricingPage({ params }: { params: { categor
           
           <div className="grid grid-cols-12 gap-4 p-4 border-b border-gray-200 bg-white text-xs font-bold text-gray-500 uppercase tracking-wider">
             <div className="col-span-6 md:col-span-5">Location & Supplier</div>
-            <div className="col-span-6 md:col-span-7 text-right">Price/MT (INR)</div>
+            <div className="col-span-6 md:col-span-7 text-right">Availability</div>
           </div>
 
           <div className="divide-y divide-gray-200">
@@ -65,27 +65,17 @@ export default async function ProductPricingPage({ params }: { params: { categor
                 </div>
 
                 <div className="col-span-6 md:col-span-7 flex justify-end">
-                  {item.locked ? (
-                    <Link href="/login" className="btn-orange text-xs flex items-center gap-1.5 py-1.5 px-3">
-                      <Lock className="w-3 h-3" /> Login To View
+                    <Link href="/contact" className="btn-orange text-xs flex items-center gap-1.5 py-1.5 px-3">
+                      Contact for Price
                     </Link>
-                  ) : (
-                    <div className="text-right">
-                      <span className="font-black text-gray-800 text-base block">{item.price}</span>
-                      <span className={`text-xs font-bold flex items-center justify-end mt-0.5 ${item.up ? 'text-green-600' : 'text-red-500'}`}>
-                        {item.up ? <TrendingUp className="w-3 h-3 mr-0.5" /> : <TrendingDown className="w-3 h-3 mr-0.5" />}
-                        {item.change}
-                      </span>
-                    </div>
-                  )}
                 </div>
               </div>
             ))}
           </div>
           
           <div className="p-6 bg-gray-50 border-t border-gray-200 text-center">
-            <Link href="/login" className="text-[var(--color-accent)] font-bold text-sm hover:underline block mb-2">
-              Login Now to Get Free Access to 4,00,000+ Prices
+            <Link href="/contact" className="text-[var(--color-accent)] font-bold text-sm hover:underline block mb-2">
+              Contact Us for Custom Pricing
             </Link>
             <p className="text-xs text-gray-500">Join 50,000+ businesses making data-driven procurement decisions.</p>
           </div>

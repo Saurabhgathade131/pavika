@@ -1,15 +1,15 @@
 import Link from "next/link";
-import { Lock, ChevronRight, TrendingDown, TrendingUp } from "lucide-react";
+import { ChevronRight } from "lucide-react";
 
 const categoryData = {
   "mild-steel": {
     title: "Mild Steel Price Today",
-    range: "₹50000-68000/Tonne | Live Rates",
+    range: "Available on Request",
     products: [
-      { id: "secondary-tmt", name: "Secondary TMT Fe 500D 12mm", price: "₹50,900/MT", origin: "Delhi", change: "+0.5%", up: true, locked: false },
-      { id: "secondary-tmt-fortune", name: "Secondary TMT Fe 500D 12mm", price: "₹50,100/MT", origin: "Mumbai", change: "0%", up: true, locked: false },
-      { id: "secondary-tmt-550", name: "Secondary TMT Fe 550D 8-32mm", price: "Login to View", origin: "Wardha", change: "", up: true, locked: true },
-      { id: "hr-coils", name: "HR Coils 2.5mm & Above", price: "Login to View", origin: "Raipur", change: "", up: false, locked: true },
+      { id: "secondary-tmt", name: "Secondary TMT Fe 500D 12mm", origin: "Delhi" },
+      { id: "secondary-tmt-fortune", name: "Secondary TMT Fe 500D 12mm", origin: "Mumbai" },
+      { id: "secondary-tmt-550", name: "Secondary TMT Fe 550D 8-32mm", origin: "Wardha" },
+      { id: "hr-coils", name: "HR Coils 2.5mm & Above", origin: "Raipur" },
     ],
     news: [
       { title: "AM/NS to start work on mega Andhra plant next week", source: "The Economic Times", time: "3 hours ago" },
@@ -18,11 +18,11 @@ const categoryData = {
   },
   "non-ferrous": {
     title: "Non-Ferrous Metals Price Today",
-    range: "₹200 - 800/Kg | Live Rates",
+    range: "Available on Request",
     products: [
-      { id: "aluminium-ingot", name: "Aluminium Ingot", price: "₹220/Kg", origin: "Mumbai", change: "-1.2%", up: false, locked: false },
-      { id: "copper-wire", name: "Copper Wire Rod", price: "₹780/Kg", origin: "Delhi", change: "+0.8%", up: true, locked: false },
-      { id: "zinc-ingot", name: "Zinc Ingot", price: "Login to View", origin: "Kolkata", change: "", up: true, locked: true },
+      { id: "aluminium-ingot", name: "Aluminium Ingot", origin: "Mumbai" },
+      { id: "copper-wire", name: "Copper Wire Rod", origin: "Delhi" },
+      { id: "zinc-ingot", name: "Zinc Ingot", origin: "Kolkata" },
     ],
     news: [
       { title: "Global copper deficit expected to widen in 2026", source: "Reuters", time: "5 hours ago" },
@@ -38,7 +38,7 @@ export default async function CategoryPage({ params }: { params: { slug: string 
     title: `${rawTitle} Prices Today`,
     range: "Prices Vary | Live Rates",
     products: [
-      { id: "sample", name: `${rawTitle} Sample Product`, price: "Login to View", origin: "Various", change: "", up: true, locked: true },
+      { id: "sample", name: `${rawTitle} Sample Product`, origin: "Various" },
     ],
     news: [
       { title: `Latest updates in the ${rawTitle} sector`, source: "Market Watch", time: "Just now" }
@@ -84,25 +84,15 @@ export default async function CategoryPage({ params }: { params: { slug: string 
                      <p className="text-sm text-gray-500 mt-1">Origin: <span className="font-bold text-gray-700">{p.origin}</span></p>
                   </div>
                   <div className="mt-4 sm:mt-0 flex flex-col items-end">
-                    {p.locked ? (
-                      <Link href="/login" className="btn-orange flex items-center gap-2">
-                        <Lock className="w-4 h-4" /> Login To View
-                      </Link>
-                    ) : (
-                      <>
-                        <span className="text-xl font-black text-gray-800">{p.price}</span>
-                        <span className={`text-xs font-bold flex items-center ${p.up ? 'text-green-600' : 'text-red-500'}`}>
-                          {p.up ? <TrendingUp className="w-3 h-3 mr-0.5" /> : <TrendingDown className="w-3 h-3 mr-0.5" />}
-                          {p.change} (3 hours ago)
-                        </span>
-                      </>
-                    )}
+                    <Link href="/contact" className="btn-orange flex items-center gap-2">
+                      Contact for Price
+                    </Link>
                   </div>
                 </div>
               ))}
             </div>
             <div className="p-4 bg-gray-50 border-t border-gray-200 text-center">
-              <Link href="/login" className="text-[var(--color-accent)] font-bold hover:underline">View All {rawTitle} Prices</Link>
+              <Link href="/contact" className="text-[var(--color-accent)] font-bold hover:underline">Contact Us for {rawTitle} Pricing</Link>
             </div>
           </div>
         </div>
