@@ -7,7 +7,7 @@ const categories = [
   { id: "non-ferrous", name: "Non-Ferrous", items: "8+ Products", desc: "Aluminium, Copper, Zinc, and Lead alloys.", img: "/categories/non-ferrous.png" },
   { id: "polymers", name: "Polymers", items: "15+ Products", desc: "PVC Resin, HDPE, LLDPE, and PP Granules.", img: "/categories/polymers.png" },
   { id: "chemicals", name: "Chemicals", items: "20+ Products", desc: "Caustic Soda, Methanol, Soda Ash, and Acids.", img: "/categories/chemicals.png" },
-  { id: "agri", name: "Agriculture", items: "10+ Products", desc: "Sugar, Wheat, Maize, and Soya Commodities.", img: "/categories/agriculture.png" },
+  { id: "agriculture", name: "Agriculture", items: "10+ Products", desc: "Sugar, Wheat, Maize, and Soya Commodities.", img: "/categories/agriculture.png" },
   { id: "energy", name: "Energy", items: "6+ Products", desc: "Bitumen, Base Oil, and Petroleum Coke.", img: "/categories/energy.png" },
   { id: "building", name: "Building", items: "10+ Products", desc: "Cement, RMC, and Construction Materials.", img: "/categories/building.png" },
   { id: "apparel", name: "Apparel", items: "8+ Products", desc: "Yarns, Fabrics, and Textile Raw Materials.", img: "/categories/apparel.png" },

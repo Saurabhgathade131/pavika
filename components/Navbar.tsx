@@ -73,7 +73,7 @@ export default function Navbar() {
           <Link href="/category/non-ferrous" className="hover:text-[var(--color-accent)] transition-colors py-3 border-b-2 border-transparent hover:border-[var(--color-accent)]">Non-Ferrous</Link>
           <Link href="/category/polymers" className="hover:text-[var(--color-accent)] transition-colors py-3 border-b-2 border-transparent hover:border-[var(--color-accent)]">Polymers</Link>
           <Link href="/category/chemicals" className="hover:text-[var(--color-accent)] transition-colors py-3 border-b-2 border-transparent hover:border-[var(--color-accent)]">Chemicals</Link>
-          <Link href="/category/agri" className="hover:text-[var(--color-accent)] transition-colors py-3 border-b-2 border-transparent hover:border-[var(--color-accent)]">Agriculture</Link>
+          <Link href="/category/agriculture" className="hover:text-[var(--color-accent)] transition-colors py-3 border-b-2 border-transparent hover:border-[var(--color-accent)]">Agriculture</Link>
           <Link href="/category/energy" className="hover:text-[var(--color-accent)] transition-colors py-3 border-b-2 border-transparent hover:border-[var(--color-accent)]">Energy & Petroleum</Link>
           <Link href="/category/building" className="hover:text-[var(--color-accent)] transition-colors py-3 border-b-2 border-transparent hover:border-[var(--color-accent)]">Building & Construction</Link>
         </div>

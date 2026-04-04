@@ -51,7 +51,7 @@ export default async function CategoryPage({ params }: { params: { slug: string 
       {/* Category Hero Header */}
       <div className="relative h-[300px] bg-[#0b2545] overflow-hidden">
         <img 
-          src={`/categories/${slug === 'agri' ? 'agriculture' : slug}.png`} 
+          src={`/categories/${slug}.png`} 
           alt={rawTitle} 
           className="w-full h-full object-cover opacity-40"
         />

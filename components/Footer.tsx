@@ -43,7 +43,7 @@ export default function Footer() {
               <li><Link href="/category/non-ferrous" className="hover:text-[var(--color-accent)] transition-colors">Non-Ferrous</Link></li>
               <li><Link href="/category/polymers" className="hover:text-[var(--color-accent)] transition-colors">Polymers</Link></li>
               <li><Link href="/category/chemicals" className="hover:text-[var(--color-accent)] transition-colors">Chemicals</Link></li>
-              <li><Link href="/category/agri" className="hover:text-[var(--color-accent)] transition-colors">Agriculture</Link></li>
+              <li><Link href="/category/agriculture" className="hover:text-[var(--color-accent)] transition-colors">Agriculture</Link></li>
             </ul>
           </div>
 
