@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import { Search, MapPin, User, ChevronDown, Menu } from "lucide-react";
 import Image from "next/image";
@@ -33,7 +35,7 @@ export default function Navbar() {
           </div>
         </Link>
 
-        {/* Search Bar (Very prominent in Ditto B2B ecommerce sites) */}
+        {/* Search Bar */}
         <div className="hidden md:flex flex-1 max-w-2xl relative">
           <div className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">
             <Search className="w-5 h-5" />
