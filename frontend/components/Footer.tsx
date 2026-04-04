@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { Facebook, Twitter, Linkedin, Instagram, MapPin, Mail, Phone } from "lucide-react";
+import { Share2, MapPin, Mail, Phone } from "lucide-react";
 
 export default function Footer() {
   return (
@@ -19,9 +19,7 @@ export default function Footer() {
               India's Largest B2B Raw Materials Procurement & Credit Platform. Dedicated to revolutionising the SME sector.
             </p>
             <div className="flex gap-4">
-              <span className="w-8 h-8 rounded bg-white/10 flex items-center justify-center hover:bg-[var(--color-accent)] cursor-pointer transition-colors"><Facebook className="w-4 h-4"/></span>
-              <span className="w-8 h-8 rounded bg-white/10 flex items-center justify-center hover:bg-[var(--color-accent)] cursor-pointer transition-colors"><Twitter className="w-4 h-4"/></span>
-              <span className="w-8 h-8 rounded bg-white/10 flex items-center justify-center hover:bg-[var(--color-accent)] cursor-pointer transition-colors"><Linkedin className="w-4 h-4"/></span>
+              <span className="w-8 h-8 rounded bg-white/10 flex items-center justify-center hover:bg-[var(--color-accent)] cursor-pointer transition-colors"><Share2 className="w-4 h-4"/></span>
             </div>
           </div>
 
