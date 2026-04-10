@@ -49,9 +49,10 @@ export default function ContactPage() {
                <div>
                  <h3 className="font-bold text-slate-900 text-lg flex items-center gap-2 mb-3"><Building2 className="w-5 h-5 text-[var(--color-accent)]"/> Corporate Office</h3>
                  <p className="text-slate-600 font-medium leading-relaxed">
-                   PAVIKA Distribution Network Pvt Ltd.<br/>
-                   Block C, Sector 44, Gurugram,<br/>
-                   Haryana 122003, India
+                   Pavika Distribution Network Private Limited<br/>
+                   Flat No-108/G/F/C-8, C. Parth Enclave<br/>
+                   Ram Vihar Pratap Nagar, Housing Board<br/>
+                   Jaipur – 302033, Rajasthan, India
                  </p>
                </div>
                 <div>
