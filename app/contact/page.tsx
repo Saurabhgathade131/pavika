@@ -50,9 +50,7 @@ export default function ContactPage() {
                  <h3 className="font-bold text-slate-900 text-lg flex items-center gap-2 mb-3"><Building2 className="w-5 h-5 text-[var(--color-accent)]"/> Corporate Office</h3>
                  <p className="text-slate-600 font-medium leading-relaxed">
                    Pavika Distribution Network Private Limited<br/>
-                   Flat No-108/G/F/C-8, C. Parth Enclave<br/>
-                   Ram Vihar Pratap Nagar, Housing Board<br/>
-                   Jaipur – 302033, Rajasthan, India
+                   Parth Enclave, Pratap Nagar, Jaipur 302033
                  </p>
                </div>
                 <div>
