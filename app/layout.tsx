@@ -15,6 +15,11 @@ const outfit = Outfit({
 export const metadata: Metadata = {
   title: "Pavika Distribution Network",
   description: "Seamlessly connecting products with markets through cutting-edge logistics and enterprise-grade service.",
+  icons: {
+    icon: "/pavika-logo.jpg",
+    shortcut: "/pavika-logo.jpg",
+    apple: "/pavika-logo.jpg",
+  },
 };
 
 import Navbar from "@/components/Navbar";
