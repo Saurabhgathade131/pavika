@@ -43,3 +43,5 @@ next-env.d.ts
 frontend_legacy_backup/
 frontend_old/
 pavikafe/
+
+.vercel

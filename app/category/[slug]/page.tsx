@@ -1,5 +1,18 @@
-import Link from "next/link";
-import { ChevronRight } from "lucide-react";
+import { Metadata } from "next";
+
+export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
+  const { slug } = await params;
+  const rawTitle = slug.split("-").map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(" ");
+  return {
+    title: `${rawTitle} Prices Today | Pavika Distribution`,
+    description: `Get real-time ${rawTitle} prices and market updates. Pavika offers the best rates for ${rawTitle} across India with direct procurement.`,
+    openGraph: {
+      title: `${rawTitle} Distribution Network | Pavika`,
+      description: `Official distribution channel for ${rawTitle}. Check latest market rates and news.`,
+      images: [`/categories/${slug}.png`],
+    }
+  };
+}
 
 const categoryData = {
   "mild-steel": {
